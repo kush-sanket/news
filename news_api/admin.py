@@ -1,9 +1,20 @@
 from django.contrib import admin
+from django.db import models
+from django.forms import SplitDateTimeWidget
 from .models import NewsArticle
 
 
 @admin.register(NewsArticle)
 class NewsArticleAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.DateTimeField: {
+            'widget': SplitDateTimeWidget
+        },
+    }
+
+    class Media:
+        js = ('news_api/js/set_now.js',)
+
     list_display = ['id', 'title', 'category', 'source_name', 'published_at', 'created_at']
     list_filter = ['category', 'source_name', 'published_at', 'created_at']
     search_fields = ['title', 'description', 'id', 'source_name']

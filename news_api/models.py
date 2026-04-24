@@ -18,7 +18,7 @@ class NewsArticle(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField()
     url_to_image = models.URLField(max_length=500, null=True, blank=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(default=timezone.now)
     source_name = models.CharField(max_length=200, default='Unknown Source')  # Simple CharField with default
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     url = models.URLField(max_length=500)
